@@ -5,7 +5,7 @@ import {
   getCosmosDBContainer,
   getDefaultBlobServiceClient
 } from "@lib/azureblob/blobServiceClient";
-import { dynamoClient } from "@lib/dynamo";
+import { dynamoDocClient } from "@lib/dynamo";
 import {
   DynamoDBMetadataRepo,
   IMetadataRepository,
@@ -29,7 +29,7 @@ export const getMetadataRepo = (): IMetadataRepository => {
 
   switch (metaDataRepoType) {
     case "dynamo":
-      return new DynamoDBMetadataRepo(dynamoClient, tableName);
+      return new DynamoDBMetadataRepo(dynamoDocClient, tableName);
     case "cosmos": {
       const cosmosConnectionString = core.getInput("cosmosConnectionString");
       const cosmosContainerName = core.getInput("cosmosContainerName");

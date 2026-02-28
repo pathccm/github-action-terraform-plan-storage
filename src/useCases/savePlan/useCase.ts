@@ -133,8 +133,8 @@ export class SaveTerraformPlanUseCase
         }
         const terraformPlan = terraformPlanOrError.getValue();
 
-        this.metaDataRepository.save(terraformPlan);
-        this.planRepository.save(terraformPlan);
+        await this.metaDataRepository.save(terraformPlan);
+        await this.planRepository.save(terraformPlan);
       } catch (err) {
         return left(new AppError.UnexpectedError(err));
       }
